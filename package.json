@@ -1,0 +1,68 @@
+{
+  "name": "engine4",
+  "version": "0.0.0",
+  "description": "CLI for the ENGINE4 API.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robingenz/engine4-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/robingenz/engine4-cli/issues"
+  },
+  "homepage": "https://github.com/robingenz/engine4-cli",
+  "type": "module",
+  "bin": {
+    "engine4": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf dist",
+    "dev": "tsdown --watch",
+    "lint": "eslint . && prettier --check .",
+    "fmt": "eslint --fix . && prettier --write .",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit && tsc -p test",
+    "prepublishOnly": "npm run build",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md}": "prettier --write"
+  },
+  "keywords": [
+    "engine4",
+    "cli"
+  ],
+  "author": "Robin Genz <mail@robingenz.dev>",
+  "license": "Beerware",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@clack/prompts": "1.8.1",
+    "engine4-node": "0.1.1",
+    "zod": "4.6.5",
+    "zodline": "0.3.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.20.5",
+    "eslint": "10.12.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.0",
+    "prettier": "3.9.9",
+    "prettier-plugin-organize-imports": "4.3.0",
+    "rimraf": "6.1.3",
+    "tsdown": "0.23.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1",
+    "vitest": "5.0.3"
+  }
+}
