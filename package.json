@@ -1,6 +1,6 @@
 {
   "name": "engine4",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "CLI for the ENGINE4 API.",
   "repository": {
     "type": "git",
