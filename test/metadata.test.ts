@@ -19,8 +19,13 @@ describe('metadata commands', () => {
 
   describe('entity list', () => {
     const entities = [
-      { EntityId: 'e1', Name: 'Customers', AllowExternalApi: true },
-      { EntityId: 'e2', Name: 'Users', AllowExternalApi: false },
+      {
+        EntityId: 'e1',
+        EntityName: 'Customer',
+        EntityFriendlyName: 'Customers',
+        AllowExternalApi: true,
+      },
+      { EntityId: 'e2', EntityName: 'User', EntityFriendlyName: 'Users', AllowExternalApi: false },
     ];
 
     it('lists only the entities with external API access', async () => {
@@ -47,7 +52,9 @@ describe('metadata commands', () => {
 
       expect(await runCli(['entity', 'list'])).toBe(0);
 
-      expect(output.stdout()).toBe('ID  NAME       EXTERNAL API\ne1  Customers  true\n');
+      expect(output.stdout()).toBe(
+        'ID  NAME      FRIENDLY NAME  EXTERNAL API\ne1  Customer  Customers      true\n',
+      );
     });
   });
 
@@ -72,7 +79,7 @@ describe('metadata commands', () => {
 
   describe('view list', () => {
     it('lists the views of an entity by type', async () => {
-      const views = [{ ViewId: 'v1', Name: 'All' }];
+      const views = [{ ViewId: 'v1', ViewName: 'All', ViewType: 'List' }];
       const fetchMock = mockFetchRoutes({ '/webapi/external/GetGenericViews': views });
 
       expect(await runCli(['view', 'list', '--entity', 'e1', '--type', 'List', '--json'])).toBe(0);
@@ -92,7 +99,14 @@ describe('metadata commands', () => {
 
   describe('view-field list', () => {
     it('lists the fields of a view', async () => {
-      const fields = [{ GenericColumnName: 'Custom_001' }];
+      const fields = [
+        {
+          GenericColumnName: 'Custom_001',
+          PropertyName: 'Name',
+          ViewFieldLabel: 'Name',
+          ViewFieldId: 'f1',
+        },
+      ];
       const fetchMock = mockFetchRoutes({ '/webapi/external/GetGenericViewFields': fields });
 
       expect(await runCli(['view-field', 'list', '--view', 'v1', '--json'])).toBe(0);

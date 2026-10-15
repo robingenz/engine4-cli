@@ -1,7 +1,7 @@
 import { defineCommand } from 'zodline';
 import { createApiClient } from '../../utils/api-client';
 import { defineCommandOptions, viewIdParam } from '../../utils/options';
-import { printJson, printRecords } from '../../utils/output';
+import { printJson, printTable } from '../../utils/output';
 
 export default defineCommand({
   description: 'List the fields (columns) shown in a view.',
@@ -15,7 +15,12 @@ export default defineCommand({
     if (options.json) {
       printJson({ items });
     } else {
-      printRecords(items);
+      printTable(items, [
+        { key: 'GenericColumnName', header: 'Column' },
+        { key: 'PropertyName', header: 'Property' },
+        { key: 'ViewFieldLabel', header: 'Label' },
+        { key: 'ViewFieldId', header: 'ID' },
+      ]);
     }
   },
 });

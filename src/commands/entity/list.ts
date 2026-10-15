@@ -19,7 +19,8 @@ export default defineCommand({
     } else {
       printTable(entities, [
         { key: 'EntityId', header: 'ID' },
-        { key: 'Name', header: 'Name' },
+        { key: 'EntityName', header: 'Name' },
+        { key: 'EntityFriendlyName', header: 'Friendly name' },
         { key: 'AllowExternalApi', header: 'External API' },
       ]);
     }

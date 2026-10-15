@@ -26,7 +26,8 @@ export default defineCommand({
     } else {
       printTable(items, [
         { key: 'ViewId', header: 'ID' },
-        { key: 'Name', header: 'Name' },
+        { key: 'ViewName', header: 'Name' },
+        { key: 'ViewType', header: 'Type' },
       ]);
     }
   },
